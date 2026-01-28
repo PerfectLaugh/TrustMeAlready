@@ -59,7 +59,12 @@ public class Main implements IXposedHookLoadPackage {
                     if (method.getReturnType().equals(void.class)) {
                         params.add(DO_NOTHING);
                     } else {
-                        params.add(returnConstant(new ArrayList<X509Certificate>()));
+                        params.add(new XC_MethodReplacement() {
+                            @Override
+                            protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                                return Arrays.asList((Object[]) param.args[0]);
+                            }
+                        });
                     }
                     findAndHookMethod(className, classLoader, name, params.toArray());
                     logHookedMethod(method.toString());

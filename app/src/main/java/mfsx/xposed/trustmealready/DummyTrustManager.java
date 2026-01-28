@@ -2,6 +2,7 @@ package mfsx.xposed.trustmealready;
 
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.net.ssl.TrustManager;
@@ -28,7 +29,7 @@ public class DummyTrustManager implements X509TrustManager {
 
     @SuppressWarnings("unused")
     public List<X509Certificate> checkServerTrusted(X509Certificate[] chain, String authType, String host) {
-        return new ArrayList<>();
+        return Arrays.asList(chain);
     }
 
     public X509Certificate[] getAcceptedIssuers() {
